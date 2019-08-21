@@ -1,12 +1,12 @@
-body {
+body,html {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(./static/c.jpg)no-repeat;
-  background-size: cover; 
+  padding: 0;
+  overflow: hidden;
 }
 
 code {
@@ -14,3 +14,12 @@ code {
     monospace;
 }
 
+.root{
+  margin:0;
+  padding: 0;
+}
+
+div{
+  margin:0;
+  padding: 0;
+}

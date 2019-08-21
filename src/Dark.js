@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './App.css';
+import Icon from './Icon';
+require('dotenv').config()
+
 
 export default class Dark extends Component {
 
@@ -8,7 +11,7 @@ export default class Dark extends Component {
         this.state = {
             temp:'0',
             summary:"",
-            icon:"",
+            icon:"CLEAR_DAY",
             humidity:"",
             precipIntensity:"",
         }
@@ -30,34 +33,47 @@ export default class Dark extends Component {
                 return res.json();
                 })
                 .then(data=>{
-                console.log(data);
-                this.setState(
+
+                this._asyncRequest=this.setState(
                     {
                         temp:((data.currently.temperature - 32 )* 5/9).toPrecision(2),
                         humidity:data.currently.humidity*100,
-                        icon:data.currently.icon,
+                        icon:(((data.currently.icon).toUpperCase()).toString()).replace(/-/g,"_"),
                         summary:data.currently.summary,
                         precipIntensity:data.currently.precipIntensity*1000+"%"
                     }
                 )
-                console.log(this.state.precipIntensity);
+                    
                 })
             });
             }
+
     }
+
+    
 
     render() {
         return (
            
             <section className="temp-data">
-              <div className="temperature">
+              <div className="temperature Dark">
                   <div className="information">
-                        <h1>
-                            {this.state.temp}<sup>o</sup>C
+                        <h1 id="h1">
+                           Temperature &nbsp; {this.state.temp}<sup>o</sup>C
                         </h1>
+                       <Icon name={this.state.icon} /> 
+                  </div>
+                  <div className="Summary">
+                      <h1>
+                          {this.state.summary}
+                      </h1>
+                      <h1>
+                         Humidity {this.state.humidity}
+                      </h1>
                   </div>
               </div>
-              {this.props.children}
+                
+            
             </section>
            
         )
